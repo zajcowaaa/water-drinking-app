@@ -1,0 +1,278 @@
+$breakpoints: (xxsmall: (min-width:400px),
+    xsmall: (min-width:576px),
+    small: (min-width:768px),
+    medium: (min-width:992px),
+    large: (min-width:1200px),
+    xlarge: (min-width:1440px),
+    xxlarge: (min-width:1700px),
+);
+
+@mixin mq($breakpoint) {
+    $size: map-get($breakpoints, $breakpoint);
+
+    @if($size) {
+        @media #{$size} {
+            @content
+        }
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;500&display=swap');
+
+
+:root {
+    --border-color: #144fc6;
+    --fill-color: #7fbdf7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+    background-color: #3195e7;
+    color: rgba(255, 255, 255, 0.89);
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 10px;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #3195e7;
+    width: 100vw;
+    height: 100vh;
+    transition: 1.2s linear;
+}
+
+.intro h1 {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+
+    @include mq(medium) {
+        font-size: 1.6rem;
+    }
+}
+
+.ready {
+    padding: 4px 10px;
+    border: 1px solid white;
+}
+
+.loader {
+    position: relative;
+    margin: 40px;
+    width: 50px;
+    height: 50px;
+
+    @include mq(medium) {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+.loader span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(calc(18deg* var(--i)));
+}
+
+.loader span:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: animate 2s linear infinite;
+    animation-delay: calc(0.1s * var(--i));
+
+    @include mq(medium) {
+        width: 7px;
+        height: 7px;
+    }
+}
+
+@keyframes animate {
+    0% {
+        transform: scale(0);
+    }
+
+    10% {
+        transform: scale(1.2);
+    }
+
+    80%,
+    100% {
+        transform: scale(0);
+    }
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 5px 0 0;
+
+    @include mq(small) {
+        font-size: 2.5rem;
+    }
+
+    @include mq(large) {
+        font-size: 2.8rem;
+    }
+}
+
+h3 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin: 5px 0;
+
+    @include mq(small) {
+        font-size: 1.8rem;
+    }
+}
+
+.cup {
+    background-color: rgb(245, 245, 245);
+    border: 2px solid var(--border-color);
+    color: var(--border-color);
+    border-radius: 0 0 40px 40px;
+    height: 300px;
+    width: 150px;
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.cup span {
+    @include mq(small) {
+        font-size: 1.2rem;
+    }
+
+    @include mq(large) {
+        font-size: 1.4rem;
+    }
+}
+
+.cup.cup-small {
+    height: 95px;
+    width: 50px;
+    border-radius: 0 0 15px 15px;
+    background-color: rgb(245, 245, 245);
+    cursor: pointer;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 5px;
+    padding: 3px;
+    transition: 0.3s ease;
+
+    @include mq(small) {
+        height: 110px;
+        margin: 7px;
+        width: 55px;
+        font-size: 1.2rem;
+    }
+
+    @include mq(medium) {
+        height: 120px;
+    }
+
+    @include mq(large) {
+        font-size: 1.3rem;
+    }
+}
+
+.cup.cup-small.full {
+    background-color: var(--fill-color);
+    color: #fff;
+}
+
+.cups {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 280px;
+}
+
+.text {
+    padding: 10px 5px;
+    margin: 8px 0;
+    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 0 5px;
+
+    @include mq(xxsmall) {
+        font-size: 1.3rem;
+        padding: 10px 20px;
+    }
+
+    @include mq(small) {
+        font-size: 1.5rem;
+    }
+
+    @include mq(large) {
+        font-size: 1.7rem;
+    }
+}
+
+
+p {
+    text-transform: lowercase;
+    font-size: 1.1rem;
+
+    @include mq(small) {
+        font-size: 1.3rem;
+    }
+}
+
+.remained {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+    transition: 0.3s ease;
+}
+
+.remained span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.remained small {
+    font-size: 12px;
+}
+
+.percentage {
+    background-color: var(--fill-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 30px;
+    height: 0;
+    transition: 0.3s ease;
+}
